@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from collections import namedtuple
-from date_utils import format_timestamp, get_gran, date_format, datetimes_from_ts
-from detect_anoms import detect_anoms
+from pyculiarity.date_utils import format_timestamp, get_gran, date_format, datetimes_from_ts
+from pyculiarity.detect_anoms import detect_anoms
 from math import ceil
 from pandas import DataFrame
 from pandas.lib import Timestamp
@@ -125,13 +125,13 @@ def detect_ts(df, max_anoms=0.10, direction='pos',
     if not isinstance(y_log, bool):
         raise ValueError("y_log must be a boolean")
 
-    if not isinstance(xlabel, basestring):
+    if not isinstance(xlabel, str):
         raise ValueError("xlabel must be a string")
 
-    if not isinstance(ylabel, basestring):
+    if not isinstance(ylabel, str):
         raise ValueError("ylabel must be a string")
 
-    if title and not isinstance(title, basestring):
+    if title and not isinstance(title, str):
         raise ValueError("title must be a string")
 
     if not title:
@@ -143,7 +143,7 @@ def detect_ts(df, max_anoms=0.10, direction='pos',
 
     if gran == "day":
         num_days_per_line = 7
-        if isinstance(only_last, basestring) and only_last == 'hr':
+        if isinstance(only_last, str) and only_last == 'hr':
             only_last = 'day'
     else:
         num_days_per_line = 1
