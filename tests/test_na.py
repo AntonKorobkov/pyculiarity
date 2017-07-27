@@ -1,5 +1,5 @@
 from nose.tools import eq_, raises
-from pyculiarity import detect_ts, detect_vec
+from pyculiarity import detect_ts
 from unittest import TestCase
 import pandas as pd
 import os
@@ -14,7 +14,7 @@ class TestNAs(TestCase):
                                     usecols=['timestamp', 'count'])
 
     def test_handling_of_leading_trailing_nas(self):
-        for i in range(10) + [len(self.raw_data) - 1]:
+        for i in list(range(10)) + [len(self.raw_data) - 1]:
             self.raw_data.set_value(i, 'count', np.nan)
 
         results = detect_ts(self.raw_data, max_anoms=0.02,
