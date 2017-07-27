@@ -43,7 +43,10 @@ def get_gran(tsdf, index=0):
     n = len(col)
 
     largest, second_largest = nlargest(2, col)
-    gran = int(round(np.timedelta64(largest - second_largest) / np.timedelta64(1, 's')))
+    try:
+        gran = int(round(np.timedelta64(largest - second_largest) / np.timedelta64(1, 's')))
+    except ValueError:
+        gran = int(round(np.timedelta64(int(largest - second_largest)) / np.timedelta64(1, 's')))
 
     if gran >= 86400:
         return "day"
